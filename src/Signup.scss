@@ -1,0 +1,98 @@
+@import './variables';
+
+.Signup {
+  @media (max-width: $small) {
+    margin-top: 3rem;
+  }
+
+  input,
+  select {
+    border: none;
+    border-bottom: 4px solid $lgrey;
+    box-sizing: border-box;
+    display: block;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 2rem;
+    width: 100%;
+
+    @media (max-width: $medium) {
+      margin-bottom: 1.8rem;
+    }
+
+    @media (max-width: $small) {
+      margin-bottom: 1.6rem;
+    }
+
+    &.error {
+      border-color: red;
+    }
+  }
+
+  label {
+    color: $grey;
+    display: block;
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+
+    @media (max-width: $medium) {
+      font-size: 23px;
+    }
+
+    @media (max-width: $small) {
+      font-size: 20px;
+    }
+  }
+
+  .error-message {
+    color: $grey;
+    display: block;
+    font-size: 12px;
+    position: absolute;
+    top: 100%;
+    line-height: 2;
+  }
+
+  button {
+    color: white;
+    cursor: pointer;
+    width: auto;
+    border: none;
+    height: auto;
+    padding: 10px 40px;
+    font-size: 1.5rem;
+    min-width: 40px;
+    box-sizing: border-box;
+    margin-top: 2rem;
+    font-weight: 600;
+    border-radius: 2px;
+    letter-spacing: -1px;
+    background-color: $green;
+  }
+
+  &-success {
+    @media (max-width: $small) {
+      margin-top: 2rem;
+    }
+
+    h4 {
+      font-size: 2rem;
+      margin: 0 0 1rem;
+
+      @media (max-width: $medium) {
+        font-size: 1.4rem;
+      }
+
+      @media (max-width: $small) {
+        font-size: 1.2rem;
+      }
+    }
+
+    span {
+      color: $green;
+      display: block;
+      margin: 1rem 0;
+    }
+  }
+}
