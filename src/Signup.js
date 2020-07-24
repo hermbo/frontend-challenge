@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { validateForm, submitForm } from './helperFunctions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import './Signup.scss';
+import { Form, Success, Label, Input, Select, Button, Error } from './styled';
 
 export default class Signup extends Component {
 
@@ -35,7 +35,7 @@ export default class Signup extends Component {
     this.setState({
       errors: validateForm(this.state.fields)
     }, () => {
-
+      // Check if any errors exist
       if (!Object.keys(this.state.errors).length) {
         submitForm(this.state.fields).then(data => {
           if (data.status === 200) {
@@ -47,74 +47,76 @@ export default class Signup extends Component {
   }
 
   render() {
+    let { fields, submitted, errors } = this.state
+    let { handleChange, handleClick } = this
     return (
-      this.state.submitted
+      submitted
       ?
-        <div className="Signup-success">
+        <Success>
           <span><FontAwesomeIcon className="icon" icon={faCheck} /> You are registered for Seattle Startup Week</span>
-          <h4>Glad you're joining us {this.state.fields.firstName}!</h4>
+          <h4>Glad you're joining us {fields.firstName}!</h4>
           <p>We think meeting other like-minded entrepreneurs is a great step towards gaining new perspectives and insights. Remember to bring a tablet of paper to take notes, and some business cards. See you there!</p>
-        </div>
+        </Success>
       :
-        <form className="Signup">
-          <label htmlFor="firstname">First Name:
-          <input
+        <Form>
+          <Label htmlFor="firstname">First Name:
+          <Input
             type="text"
             id="firstname"
             name="firstName"
-            value={this.state.fields.firstName}
-            onChange={this.handleChange}
-            className={'firstName' in this.state.errors ? 'error' : ''} />
-            {'firstName' in this.state.errors ? <span className="error-message">{this.state.errors.firstName}</span> : ''}
-          </label>
-          <label htmlFor="lastname">Last Name:
-            <input
+            value={fields.firstName}
+            onChange={handleChange}
+            className={'firstName' in errors ? 'error' : ''} />
+            {'firstName' in errors ? <Error>{errors.firstName}</Error> : ''}
+          </Label>
+          <Label htmlFor="lastname">Last Name:
+            <Input
               type="text"
               id="lastname"
               name="lastName"
-              value={this.state.fields.lastName}
-              onChange={this.handleChange}
-              className={'lastName' in this.state.errors ? 'error' : ''} />
-              {'firstName' in this.state.errors ? <span className="error-message">{this.state.errors.firstName}</span> : ''}
-          </label>
-          <label htmlFor="email">Email:
-            <input
+              value={fields.lastName}
+              onChange={handleChange}
+              className={'lastName' in errors ? 'error' : ''} />
+              {'lastName' in errors ? <Error>{errors.lastName}</Error> : ''}
+          </Label>
+          <Label htmlFor="email">Email:
+            <Input
               type="text"
               id="email"
               name="email"
-              value={this.state.fields.email}
-              onChange={this.handleChange}
-              className={'email' in this.state.errors ? 'error' : ''} />
-            {'email' in this.state.errors ? <span className="error-message">{this.state.errors.email}</span> : ''}
-          </label>
-          <label htmlFor="company">Company Name:
-            <input
+              value={fields.email}
+              onChange={handleChange}
+              className={'email' in errors ? 'error' : ''} />
+            {'email' in errors ? <Error>{errors.email}</Error> : ''}
+          </Label>
+          <Label htmlFor="company">Company Name:
+            <Input
               type="text"
               id="company"
               name="company"
-              value={this.state.fields.company}
-              onChange={this.handleChange}
-              className={'company' in this.state.errors ? 'error' : ''} />
-            {'company' in this.state.errors ? <span className="error-message">{this.state.errors.company}</span> : ''}
-          </label>
-          <label htmlFor="role">Your Role:
-            <select
+              value={fields.company}
+              onChange={handleChange}
+              className={'company' in errors ? 'error' : ''} />
+            {'company' in errors ? <Error>{errors.company}</Error> : ''}
+          </Label>
+          <Label htmlFor="role">Your Role:
+            <Select
               type="text"
               id="role"
               name="role"
-              defaultValue={this.state.fields.role}
-              onChange={this.handleChange}
-              className={'role' in this.state.errors ? 'error' : ''}>
+              defaultValue={fields.role}
+              onChange={handleChange}
+              className={'role' in errors ? 'error' : ''}>
                 <option value="" disabled></option>
                 <option value="Investor">Investor</option>
                 <option value="Mentor">Mentor</option>
                 <option value="Founder">Founder</option>
                 <option value="Network Member">Network Member</option>
-            </select>
-            {'role' in this.state.errors ? <span className="error-message">{this.state.errors.role}</span> : ''}
-          </label>
-          <button onClick={this.handleClick}>Sign-up</button>
-        </form>
+            </Select>
+            {'role' in errors ? <Error>{errors.role}</Error> : ''}
+          </Label>
+          <Button onClick={handleClick}>Sign-up</Button>
+        </Form>
     );
   }
 }
